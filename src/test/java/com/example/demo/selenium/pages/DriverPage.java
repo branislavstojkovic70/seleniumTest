@@ -1,8 +1,5 @@
 package com.example.demo.selenium.pages;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -83,6 +80,26 @@ public class DriverPage {
         btnEnd = wait.until(ExpectedConditions.elementToBeClickable(By.id("end")));
         js.executeScript("arguments[0].scrollIntoView();", btnEnd);
         js.executeScript("arguments[0].click();", btnEnd);
+        return true;
+    }
+
+    public boolean endRideFalse() {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        btnCurrentRide = wait.until(ExpectedConditions.elementToBeClickable(By.id("currentRide")));
+        js.executeScript("arguments[0].scrollIntoView();", btnCurrentRide);
+        js.executeScript("arguments[0].click();", btnCurrentRide);
+        try {
+            WebDriverWait wait1 = new WebDriverWait(driver, 30);
+            wait1.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
+            System.out.println(alert.getText());
+            alert.accept();
+        } catch (NoAlertPresentException e) {
+            System.out.println("No Alert present");
+        } finally {
+            driver.quit();
+        }
         return true;
     }
 }
