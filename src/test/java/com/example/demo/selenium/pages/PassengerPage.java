@@ -155,6 +155,36 @@ public class PassengerPage {
         return true;
     }
 
+    public boolean submitOrderWithAlert(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        form1Submit3 = wait.until(ExpectedConditions.elementToBeClickable(By.id("next3")));
+        js.executeScript("arguments[0].scrollIntoView();", form1Submit3);
+        js.executeScript("arguments[0].click();", form1Submit3);
+
+        try {
+            WebDriverWait wait1 = new WebDriverWait(driver, 30);
+            wait1.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
+            System.out.println(alert.getText());
+            alert.accept();
+        } catch (NoAlertPresentException e) {
+            System.out.println("No Alert present");
+        } finally {
+            driver.quit();
+        }
+        return true;
+
+
+    }
+
 
 
 

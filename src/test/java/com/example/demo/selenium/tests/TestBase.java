@@ -17,7 +17,7 @@ public class TestBase {
 
     @BeforeSuite
     public void initializeWebDriver() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().setPosition(new Point(0, 0));
         Dimension halfScreenSize = new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2), (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight());
@@ -25,7 +25,7 @@ public class TestBase {
 //        driver.manage().window().fullscreen();
 
 
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         passenger = new ChromeDriver();
         passenger.manage().window().setPosition(new Point((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2), 0));  // Podešava položaj prozora na sredinu ekrana
         passenger.manage().window().setSize(halfScreenSize);
